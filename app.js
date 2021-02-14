@@ -27,6 +27,8 @@ const showImages = (images) => {
   })
 }
 
+ 
+
 const getImages = (query) => {
   displaySpinner(true);
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
@@ -34,6 +36,12 @@ const getImages = (query) => {
     .then(data => showImages(data.hits))
     .catch(err => console.log(err))
 }
+  const showImageNumbers = () => {
+    const imgNumber = document.getElementById('img-number');
+    imgNumber.innerHTML =`
+       ${sliders.length}
+    `;
+  }
 
 let slideIndex = 0;
 const selectItem = (event, img) => {
@@ -44,9 +52,11 @@ const selectItem = (event, img) => {
   console.log(sliders);
   if (item === -1) {
     sliders.push(img);
+    showImageNumbers();
   }
   else{
     sliders.splice(item, 1)
+    showImageNumbers();
   }
 }
 var timer
